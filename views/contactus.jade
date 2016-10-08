@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1 Contact Us
+  form(action='/contactus', method='POST')
+    div
+      | Fullname:
+      input(type='text' name='fullname')
+    div
+      | Type:
+      select(name='type')
+        option(value='suggestion') Suggestion
+        option(value='complaint') Complaint
+    div
+      | Message:
+      textarea(name='message')
+    div
+      input(type='submit', value="Submit")
+    input(type='hidden', name='_csrf', value='#{csrftoken}')
+  if errors
+    h4(style='color:red')
+      - for(let i=0;i<errors.length;i++) {
+        =errors[i].msg
+        br
+      - }
